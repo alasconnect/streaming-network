@@ -11,17 +11,24 @@ extra-source-files:  README.md
 cabal-version:       >=1.10
 
 library
-  exposed-modules:     Streaming.Network.Client.Telnet
+  exposed-modules:     Data.Attoparsec.DSL.Builder
+                     , Data.Attoparsec.DSL.Mapper
+                     , Data.Attoparsec.DSL.Template
+                     , Streaming.Network.Client.Telnet
                      , Streaming.Network.Client.Telnet.Cmd
                      , Streaming.Network.Client.Telnet.Parser
   build-depends:       base >=4.10 && <4.11
                      , attoparsec >=0.13
                      , bytestring >=0.10
+                     , hashmap
                      , network-simple
+                     , megaparsec
                      , mtl
+                     , scientific
                      , streaming
                      , streaming-bytestring
                      , streaming-utils
+                     , text
   hs-source-dirs:      src
   default-language:    Haskell2010
 
@@ -31,5 +38,6 @@ executable streaming-network-example
                      , streaming-network
                      , attoparsec >=0.13
                      , bytestring >=0.10
+                     , text
   hs-source-dirs:      example
   default-language:    Haskell2010

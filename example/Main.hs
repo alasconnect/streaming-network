@@ -11,6 +11,8 @@ import Data.Monoid ((<>))
 
 import Streaming.Network.Client.Telnet
 
+import Data.Attoparsec.DSL.Template (fromFile)
+
 type Time  = String
 type Date  = String
 type Place = String
@@ -105,5 +107,12 @@ commandHandler s Menu{}    = (s, Just "x\n")
 commandHandler s Weather{} = (s, Nothing)
 commandHandler s _         = (s, Nothing)
 
+-- main :: IO ()
+-- main = runTelnet addr port commandReader () commandHandler >>= print
+
 main :: IO ()
-main = runTelnet addr port commandReader () commandHandler >>= print
+main = do
+  result <- fromFile "/src/streaming-network/data/Ont.pt" "Ont.pt"
+  case result of
+    Left err -> putStrLn . show $ err
+    Right o  -> putStrLn . show $ o
